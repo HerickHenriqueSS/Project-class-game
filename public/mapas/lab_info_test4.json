@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"lab_info_test4.tmj"
-        }
-    },
  "height":27,
  "infinite":false,
  "layers":[

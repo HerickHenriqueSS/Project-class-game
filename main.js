@@ -14,7 +14,7 @@ const config = {
       gravity: {
         y: 0
       },
-      debug: false
+      debug: true
     }
   },
   pixelArt: true,
@@ -24,3 +24,7 @@ const config = {
 }
 
 export default new Phaser.Game(config);
+
+
+
+

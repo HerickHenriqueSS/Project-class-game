@@ -1,11 +1,14 @@
+import { CONFIG } from "../config";
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     /** @type {Phaser.Type.Input.Keyboard.CursorKeys} */
 
     cursors;
 
-    constructor(scene, x, y){
+    constructor(scene, x, y, touch){
         super(scene, x, y, 'player')
+
+        this.touch = touch;
 
         scene.add.existing(this);         // Criando a imagem que o jogador ve
         scene.physics.add.existing(this); // Criando o Body da Fisica
@@ -21,6 +24,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.direction = 'down';
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
+        this.body.setSize(14, 10);
+        this.body.setOffset(1, 22);
         this.initAnimations();
 
         this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
@@ -29,7 +34,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(){
-        const{ left, right, down, up} = this.cursors;
+        const{ left, right, down, up, space} = this.cursors;
 
         if (left.isDown) {
             this.direction = 'left'
@@ -49,6 +54,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }else{
             this.setVelocityY(0);
         }
+        if( space.isDown){
+            console.log('space')
+        }
 
         //Parou de andar
         if ( this.body.velocity.x === 0 && this.body.velocity.y === 0 ){
@@ -56,6 +64,33 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }else {
             this.play('walk-' + this.direction, true);
         }
+
+        //Fazer o touch seguir o player
+        let tx, ty;
+        let distance = 16;
+
+        switch(this.direction) {
+            case 'down':
+                tx = 0;
+                ty = - distance + CONFIG.TILE_SIZE;
+                break;
+
+            case 'up':
+                tx = 0;
+                ty = -distance + CONFIG.TILE_SIZE;
+                break;
+
+            case 'right':
+                tx = distance /2;
+                ty = CONFIG.TILE_SIZE/2;
+                break;
+
+            case 'left':
+                tx = - distance;
+                ty = CONFIG.TILE_SIZE/2;
+                break;
+        }
+        this.touch.setPosition(this.x + tx + CONFIG.TILE_SIZE/2, this.y + ty);
 
     }
 
@@ -115,7 +150,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.anims.create({
             key: 'walk-down',
             frames: this.anims.generateFrameNumbers('player', {
-            start: 45, end: 51}),
+            start: 46, end: 51}),
             frameRate: this.frameRate,
             repeat: -1
         });
