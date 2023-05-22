@@ -73,6 +73,9 @@ export default class Lab extends Scene{
         this.player =  new Player(this, 144, 90, this.touch);
         this.player.setDepth(3)
 
+    }
+    createLixeira(){
+
         const lixeiraAmarela = this.add.sprite(184,48, 'lixeira1', 0) ;
         const lixeiraAzul = this.add.sprite(200,48, 'lixeira1', 3) ;
     }
@@ -221,7 +224,6 @@ export default class Lab extends Scene{
         if (this.player.isAction){
             this.isTouching = true;
             console.log('estou tocando');
-            console.log(objects)
             if(objects.name == 'cadeira'){
                 if(this.player.body.enable == true){
                     this.player.body.enable = false;
