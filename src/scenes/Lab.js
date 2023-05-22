@@ -243,7 +243,7 @@ export default class Lab extends Scene{
             }
         
             
-
+        //Quando clica abre a lixeira azul com lixo     
             if(objects.name == 'lixeiraLaranja'){
                 if(this.player.body.enable == true){
                     this.player.body.enable = false;
@@ -255,6 +255,9 @@ export default class Lab extends Scene{
                     const lixeiraAmarela = this.add.sprite(184,48, 'lixeira1', 0) ;
                 }
             }
+
+
+            //Quando clica abre a lixeira azul com lixo
 
             if(objects.name == 'lixeiraAzul'){
                 if(this.player.body.enable == true){
@@ -270,12 +273,7 @@ export default class Lab extends Scene{
             }
 
 
-            if(objects.name == 'eletronico'){
-                if(this.player.body.enable == true){
-                    const dialog = new Dialog(this, 150, 150, 'Proibido uso de eletronicos!')
-                    dialog.setVisible(true)
-                }
-
+            // Quando clicado aparece a mensagem que esta na Placa 1
             }
             if(objects.name == 'bebida'){
                 if(this.player.body.enable == true){
@@ -284,6 +282,21 @@ export default class Lab extends Scene{
                 }
 
             }
+
+            
+
+            // Quando clicado aparece a mensagem que esta na Placa 2
+            if(objects.name == 'eletronico'){
+                if(this.player.body.enable == true){
+                    const dialog = new Dialog(this, 150, 150, 'Proibido uso de eletronicos!')
+                    dialog.setVisible(true)
+                }
+
+
+
+
+            // Quando clicado aparece a mensagem que esta no quadro
+
         }
         if (this.player.isAction){
             this.isTouching = true;
@@ -292,5 +305,6 @@ export default class Lab extends Scene{
                 dialog.setVisible(true)
             }
         }
+        
     }
 }
