@@ -5,6 +5,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     cursors;
 
+    isAction = false;   // Diz se a tecla espaço( de ação ) esta precionada
+
     constructor(scene, x, y, touch){
         super(scene, x, y, 'player')
 
@@ -55,7 +57,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(0);
         }
         if( space.isDown){
-            console.log('space')
+            this.isAction = true;
+        }else{
+            this.isAction = false;
         }
 
         //Parou de andar
@@ -72,22 +76,27 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         switch(this.direction) {
             case 'down':
                 tx = 0;
-                ty = - distance + CONFIG.TILE_SIZE;
+                ty = distance + CONFIG.TILE_SIZE/2.8;
                 break;
 
             case 'up':
                 tx = 0;
-                ty = -distance + CONFIG.TILE_SIZE;
+                ty = - distance + CONFIG.TILE_SIZE;
                 break;
 
             case 'right':
-                tx = distance /2;
+                tx = distance /8;
                 ty = CONFIG.TILE_SIZE/2;
                 break;
 
             case 'left':
                 tx = - distance;
                 ty = CONFIG.TILE_SIZE/2;
+                break;
+
+            case 'space':
+                tx = 0;
+                ty = 0;
                 break;
         }
         this.touch.setPosition(this.x + tx + CONFIG.TILE_SIZE/2, this.y + ty);
@@ -154,5 +163,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             frameRate: this.frameRate,
             repeat: -1
         });
+        
     }
 }
