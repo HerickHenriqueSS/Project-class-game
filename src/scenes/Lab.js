@@ -63,11 +63,6 @@ export default class Lab extends Scene{
 
     }
 
-    createDialog(){
-        const dialog = new Dialog(this, 200, 200, 'Ta reporvado Kennes Eduardo')
-        dialog.setVisible(true);
-    }
-
     createPlayer(){
         this.touch = new Touch(this, 144, 90);
 
@@ -261,9 +256,8 @@ export default class Lab extends Scene{
 
             if(objects.name == 'lixeiraAzul'){
                 if(this.player.body.enable == true){
-                    this.player.body.enable = false;const lixeiraAzul = this.add.sprite(200,48, 'lixeira1', 5) ;
+                    this.player.body.enable = false;const lixeiraAzul = this.add.sprite(200,48, 'lixeira1', 4) ;
                     const dialog = new Dialog(this, 150, 150, 'Seu preconceito 👌!')
-                    
                                       
                 }else{
                     this.player.body.enable = true;
