@@ -53,6 +53,7 @@ export default class Lab extends Scene{
         this.createPlayer();
         this.createColliders()
         this.createCamera()
+        this.createLixeira()
 
     }
 
